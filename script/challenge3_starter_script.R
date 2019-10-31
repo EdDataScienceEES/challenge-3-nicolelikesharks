@@ -9,7 +9,7 @@
 library(tidyverse)
 
 # Load Living Planet Data
-LPI_species <- read.csv("data/LPI_species.csv")
+load("data/LPI_species.Rdata")
 
 # Choose your species from this list - don't forget to register your species
 # on the issue for the challenge and check that no other student has chosen 
