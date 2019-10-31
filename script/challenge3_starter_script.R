@@ -7,7 +7,6 @@
 
 # Libraries
 library(tidyverse)
-library(scales)
 
 # Load Living Planet Data
 LPI_species <- read.csv("data/LPI_species.csv")
