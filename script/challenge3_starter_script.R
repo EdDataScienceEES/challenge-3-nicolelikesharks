@@ -1,7 +1,7 @@
 # Challenge 3 Statistical Modelling
-# Data Science in EES 2019
+# Data Science in EES 2020
 # Starter script written by Isla Myers-Smith
-# 31st October 2019
+# 4th November 2020
 
 # Starter code ----
 
@@ -20,10 +20,7 @@ unique(LPI_species$Common.Name)
 
 # Statistical analysis ----
 
-# Frequentist Linear model ----
+# Hierarchical linear model ----
 
-# Frequentist Hierarchical linear model ----
+# Model and data visualisation ----
 
-# Bayesian linear model ----
-
-# Bayesain hierarchical linear model ----

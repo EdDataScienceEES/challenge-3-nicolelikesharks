@@ -12,26 +12,26 @@ Date:
 
 
 
-3.  What's the main question being asked or hypothesis being tested in this study?
+3. What's the main question being asked or hypothesis being tested in this study?
 
 
 
-4.  Describe the key independent and dependent variable(s).
+4. Describe the key independent and dependent variable(s).
 
 
 
-5.  What are the spatial and temporal structures to the data (number of sites, duration in years, etc.)?
+5. What are the spatial and temporal structures to the data (number of sites, duration in years, etc.)?
 
 
 
-5.  What is the overall sample size?
+6. What is the overall sample size?
 
 
 
-6.  Specify exactly which analyses you will conduct to examine the main question/hypothesis.
+7. Specify exactly which analyses you will conduct to examine the main question/hypothesis.
 
 
 
-7.  Is there any other study information you would like to pre-register?
+8. Is there any other study information you would like to pre-register?
 
 
