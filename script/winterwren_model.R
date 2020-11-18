@@ -94,6 +94,7 @@ hist(Population,
 # Saving the basic histogram 
 
 ggsave("Output/Facet_plot.pdf", split_plot)
+ggsave("Output/Facet_plot.png", split_plot)
 
 
 # Fit all data to linear model ignoring random effects for now
@@ -111,6 +112,7 @@ summary(basic.lm)
 
 # Saving basic plot
 ggsave("Output/prelim_plot.pdf", prelim_plot)
+ggsave("Output/prelim_plot.png", prelim_plot)
 
 
 # Checking assumptions to decide on what statistical model to use----
@@ -180,6 +182,9 @@ save_plot(filename = "Output/model_fe.png",
     theme(axis.text.x = element_text(size = 12, angle = 15,margin=margin(20))) +
     labs(x = "Location of population", y = "Scaled population"))
     
+ggsave("Output/boxplot2.pdf", boxplot2)
+ggsave("Output/boxplot2.png", boxplot2)
+
 
 # Plot coloured points by location
 (colour_plot <- ggplot(LPI_wren_cad, aes(x = year, y = scalepop, colour = Location.of.population)) +
@@ -188,6 +193,7 @@ save_plot(filename = "Output/model_fe.png",
     theme(legend.position = "none"))
   
 ggsave("Output/colour_plot.pdf", colour_plot)
+ggsave("Output/colour_plot.png", colour_plot)
 
 
 
