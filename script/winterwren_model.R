@@ -15,6 +15,7 @@ library(sjPlot)     # to visualise model outputs
 library(ggeffects)  # to visualise model predictions
 library(stargazer)
 library(agridat)
+library(glmmTMB)
 
 
 # Load Living Planet Data
