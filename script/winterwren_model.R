@@ -62,9 +62,10 @@ LPI_wren_count <- LPI_wren %>%
 
 # Filtering dataset for only one Unit( i.e Sampling method) and one country (i.e Canada). 
 # Discarding samples that do not specify a useful detailed location (just "canada")
-
+# Fix error in location name due to special character
 LPI_wren_cad <- LPI_wren %>%
   filter(Country.list == "Canada", Location.of.population!="Canada",Units == "Annual Index")%>%
+  mutate(Location.of.population=recode(Location.of.population,"Qu<ed><a9>bec" = "Quebec"))%>% 
   mutate(population_int = pop*1000) %>% 
   droplevels()
 
@@ -80,8 +81,9 @@ hist(Population,
      xlab="Annual index of wren population",
      xlim=c(-1,1)) # Our distribution is left-skewed
 
-(split_plot <- ggplot(aes(year, scalepop), data = LPI_wren_cad) + 
+(split_plot <- ggplot(aes(year, scalepop, colour=Location.of.population), data = LPI_wren_cad) + 
     geom_point() + 
+    theme(legend.position = "none")+
     facet_wrap(~ Location.of.population) + # create a facet for each location
     xlab("Year") + 
     ylab("Pop")+
