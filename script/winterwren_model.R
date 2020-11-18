@@ -75,12 +75,10 @@ LPI_wren_cad <- LPI_wren %>%
 
 Population <- LPI_wren_cad$scalepop
 
-hist(Population)
-
 hist(Population,
      main="Histogram of wren population data",
      xlab="Annual index of wren population",
-     xlim=c(0,15)) # Our distribution is left-skewed
+     xlim=c(-1,1)) # Our distribution is left-skewed
 
 (split_plot <- ggplot(aes(year, scalepop), data = LPI_wren_cad) + 
     geom_point() + 
@@ -146,7 +144,28 @@ summary(mixed.lmer) # 0.04302/(0.04302 + 0.19176) =  ~18%
 
 plot(mixed.lmer)
 qqnorm(resid(mixed.lmer))
-qqline(resid(mixed.lmer))  # points fall nicely onto the line - good!
+qqline(resid(mixed.lmer))  # points roughly follow line, deviate slightly at the end
+
+
+# Visualizing random effects----
+
+# Set a clean theme for the graphs
+set_theme(base = theme_bw() + 
+            theme(panel.grid.major.x = element_blank(),
+                  panel.grid.minor.x = element_blank(),
+                  panel.grid.minor.y = element_blank(),
+                  panel.grid.major.y = element_blank(),
+                  plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm")))
+
+# Visualises random effect (location)
+(re.effects <- plot_model(mixed.lmer, type = "re", show.values = TRUE))
+save_plot(filename = "Output/model_re.png",
+          height = 11, width = 9) 
+
+# To see the estimate for fixed effect (year)
+(fe.effects <- plot_model(mixed.lmer, show.values = TRUE))
+save_plot(filename = "Output/model_fe.png",
+          height = 11, width = 9)  
 
 
 # Creating independence boxplots
@@ -170,9 +189,5 @@ ggsave("Output/colour_plot.pdf", colour_plot)
 
 
 
-
-#Copy contents
-mountain.lm <- lm(testScore ~ bodyLength2 + mountainRange, data = dragons)
-summary(mountain.lm)
 
 
