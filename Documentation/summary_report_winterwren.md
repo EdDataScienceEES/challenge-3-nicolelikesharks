@@ -71,17 +71,17 @@ Accessed: https://www.audubon.org/field-guide/bird/winter-wren on 12th November 
 ## 9. Appendix   
 
 Initial data exploration to decide which model to use: 
-![basic hist](../master/Output/basic_hist.png)
+![basic hist](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/basic_hist.png?raw=true)
 ![prelimplot](../master/prelim_plot.pdf)
 ![facet plot](../master/Output/Facet_plot.pdf)
 
 
 Visualization of model: 
 ![colourplot](../master/Output/colour_plot.png)
-![assumption](../master/Output/assumption_plots.png)
+![assumption](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/assumption_plots.pdf)
 
 
 
 Statistical analysis:
-![modelfe](../master/Output/model_fe.png)
-![modelre](../master/Output/model_re.png)
+![modelfe](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/model_re.png?raw=true)
+![modelre](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/model_fe.png?raw=true)
