@@ -72,13 +72,17 @@ Accessed: https://www.audubon.org/field-guide/bird/winter-wren on 12th November 
 
 Initial data exploration to decide which model to use: 
 ![basic hist](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/basic_hist.png?raw=true)
-![prelimplot](../master/prelim_plot.pdf)
-![facet plot](../master/Output/Facet_plot.pdf)
+![prelimplot](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/prelim_plot.png?raw=true)
+![facet plot](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/Facet_plot.png?raw=true)
 
 
 Visualization of model: 
-![colourplot](../master/Output/colour_plot.png)
-![assumption](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/assumption_plots.pdf)
+![colourplot](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/colour_plot.png?raw=true)
+![assumption1](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/Assumption_plot_1.png?raw=true)
+![assumption2](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/Assumption_plot_2.png?raw=true)
+![assumption3](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/assumption_plot_3.png?raw=true)
+![assumption4](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/assumption_plot_4.png?raw=true)
+
 
 
 
