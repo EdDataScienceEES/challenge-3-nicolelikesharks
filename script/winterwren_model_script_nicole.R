@@ -71,6 +71,11 @@ LPI_wren_cad <- LPI_wren %>%
   mutate(population_int = pop*1000) %>% 
   droplevels()
 
+# Save our modified dataset as a .csv file
+write.csv(LPI_wren_cad, file = "data/LPI_wren_cad.csv")
+
+str(LPI_wren_cad)
+
 
 # Preliminary data visualiazation---- 
 
@@ -83,9 +88,13 @@ hist(Population,
      xlab="Annual index of wren population",
      xlim=c(-1,1)) # Our distribution is right-skewed
 
-(split_plot <- ggplot(aes(year, scalepop, colour=Location.of.population), data = LPI_wren_cad) + 
+
+# Looking at facet plots quickly to eyeball population trends in each location
+
+(basic_facetplot <- ggplot(aes(year, scalepop, colour=Location.of.population), data = LPI_wren_cad) + 
     geom_point() + 
-    theme(legend.position = "none")+
+    theme_classic() +
+    theme(legend.position = "none", panel.spacing = unit(2, "lines")) +  # adding space between panels
     facet_wrap(~ Location.of.population) + # create a facet for each location
     xlab("Year") + 
     ylab("scalepop")+
@@ -95,11 +104,8 @@ hist(Population,
 
 # Saving the facet plots
 
-ggsave("Output/Facet_plot.pdf", split_plot)
-ggsave("Output/Facet_plot.png", split_plot)
-
-
-
+ggsave("Output/Basic_facet_plot.pdf", basic_facetplot)
+ggsave("Output/Basic_facet_plot.png", basic_facetplot)
 
 
 # Fit all data to linear model ignoring random effects for now
@@ -136,11 +142,10 @@ plot(basic.lm)
 dev.off()
 
 
-# Generating mixed effect model using lme4 package----
+# Generating mixed effect models----
 
-
+# Generating model with random intercept (location of population as random effect)
 # Testing if association between year and wren population exists after controlling for the variation in location.
-# Fix location of population as random effect
 
 mixed.lmer <- lmer(scalepop ~ year + (1|Location.of.population), data = LPI_wren_cad) 
 summary(mixed.lmer) # 0.04302/(0.04302 + 0.19176) =  ~18% 
@@ -150,20 +155,48 @@ summary(mixed.lmer) # 0.04302/(0.04302 + 0.19176) =  ~18%
                     ## effect/slope can be distinguished from 0. 
 
 
-# Random slope and random intercept
+# Generating model with random slope and random intercept
 
 
-mixed.re.rs <- lmer(scalepop ~ year + (1 + year|Location.of.population), data = LPI_wren_cad) 
+mixed.re.rs <- lmer(scalepop ~ year + (1 + year|Location.of.population), data = LPI_wren_cad) # doesn't converge? error
 summary(mixed.re.rs)
 
 
+# Visualizing models----
+
+# Visualization for random intercept model 
+ 
+(model_vis_plot <- ggplot(LPI_wren_cad, aes(x = year, y = scalepop, colour = Location.of.population)) +
+   facet_wrap(~Location.of.population) +   # a panel for each mountain range
+   geom_point(alpha = 0.5) +
+   theme_classic() +
+   geom_line(data = cbind(LPI_wren_cad, pred = predict(mixed.lmer)), aes(y = pred), size = 1) +  # adding predicted line from mixed model 
+   theme(legend.position = "none",
+         panel.spacing = unit(2, "lines"))  # adding space between panels
+)
+
+ggsave("Output/Pred_facet_plot_ri.pdf", model_vis_plot)
+ggsave("Output/Pred_facet_plot_ri.png", model_vis_plot)
+
+# Visualization for random intercept and random slope model
+
+(model_vis_plot_rs <- ggplot(LPI_wren_cad, aes(x = year, y = scalepop, colour = Location.of.population)) +
+    facet_wrap(~Location.of.population) +   # a panel for each mountain range
+    geom_point(alpha = 0.5) +
+    theme_classic() +
+    geom_line(data = cbind(LPI_wren_cad, pred = predict(mixed.re.rs)), aes(y = pred), size = 1) +  # adding predicted line from mixed model 
+    theme(legend.position = "none",
+          panel.spacing = unit(2, "lines"))  # adding space between panels
+)
+ggsave("Output/Pred_facet_plot_rs.pdf", model_vis_plot_rs)
+ggsave("Output/Pred_facet_plot_rs.png", model_vis_plot_rs)
 
 # Plotting model predictions---- 
 
 # Extract the prediction data frame
 pred.mm <- ggpredict(mixed.lmer, terms = c("year"))  # Outputs overall predictions for the model
 
-# Plot the predictions 
+# Plot the predictions (random intercept model)
 
 (prediction_plot <- ggplot(pred.mm) + 
     geom_line(aes(x = x, y = predicted)) +          # slope
@@ -176,12 +209,32 @@ pred.mm <- ggpredict(mixed.lmer, terms = c("year"))  # Outputs overall predictio
     theme_minimal()
 )
 
-
-
-
-# Saving prediction plot 
+# Saving prediction plot (random intercept model)
 ggsave("Output/prediction_plot.pdf", prediction_plot)
 ggsave("Output/prediction_plot.png", prediction_plot)
+
+# Extract the prediction data frame
+
+pred.mm.rs <- ggpredict(mixed.re.rs, terms = c("year"))  # this gives overall predictions for the model
+
+
+# Plot predictions (random slope and random interecpt model)
+
+(prediction_plot_rs <- ggplot(pred.mm.rs) + 
+    geom_line(aes(x = x, y = predicted)) +          # slope
+    geom_ribbon(aes(x = x, ymin = predicted - std.error, ymax = predicted + std.error), 
+                fill = "lightgrey", alpha = 0.5) +  # error band
+    geom_point(data = LPI_wren_cad,                      # adding the raw data (scaled values)
+               aes(x = year, y = scalepop, colour = Location.of.population)) + 
+    labs(x = "Year", y = "Population Abundance (Annual Index)", 
+         title = "Year does affect population abundance of winter wrens") + 
+    theme_minimal()
+)
+
+
+# Saving prediction plot (random slope model)
+ggsave("Output/prediction_plot_rs.pdf", prediction_plot_rs)
+ggsave("Output/prediction_plot_rs.png", prediction_plot_rs)
 
 
 # Make summary table----
@@ -209,10 +262,13 @@ set_theme(base = theme_bw() +
                   panel.grid.major.y = element_blank(),
                   plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm")))
 
+
 # Visualises random effect (location)
+
 (re.effects <- plot_model(mixed.lmer, type = "re", show.values = TRUE))
 save_plot(filename = "Output/model_re.png",
           height = 11, width = 9) 
+
 
 # To see the estimate for fixed effect (year)
 (fe.effects <- plot_model(mixed.lmer, show.values = TRUE))
