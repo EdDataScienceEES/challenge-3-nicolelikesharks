@@ -22,7 +22,14 @@
  
 - [Script folder](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/tree/master/script)        
   Original starter script used to choose a species from dataset: [challenge3_starter_script.R](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/challenge3_starter_script.R)    
-  Main script used to filter and tidy the original dataset, as well as construct our model and export the results: [winterwren_model_script_nicole.R](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/winterwren_model_script_nicole.R)    
+  Main script used to filter and tidy the original dataset, as well as construct our model and export the results: [winterwren_model_script_nicole.R](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/winterwren_model_script_nicole.R)  
+  
+## Resources: 
+
+https://ourcodingclub.github.io/2017/02/28/modelling.html - Intro to linear models
+https://ourcodingclub.github.io/2018/04/06/model-design.html - Intro to model design
+https://ourcodingclub.github.io/2017/03/15/mixed-models.html - Intro to mixed effects models https://ourcodingclub.github.io/2017/03/29/data-vis-2.html - Data visualisation (including plotting mixed effects)
+https://ourcodingclub.github.io/2018/01/22/mcmcglmm.html - Intro to Bayesian statistics
   
 ## Access and citation:   
 Data from the LPI database can be used for non-commercial purposes, provided that full and appropriate acknowledgement is provided.    
