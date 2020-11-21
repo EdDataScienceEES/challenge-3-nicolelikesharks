@@ -15,7 +15,8 @@ library(sjPlot)     # to visualise model outputs
 library(ggeffects)  # to visualise model predictions
 library(stargazer)
 library(agridat)
-library(glmmTMB)
+library(directlabels)
+
 
 
 # Load Living Planet Data
@@ -80,22 +81,25 @@ Population <- LPI_wren_cad$scalepop
 hist(Population,
      main="Histogram of wren population data",
      xlab="Annual index of wren population",
-     xlim=c(-1,1)) # Our distribution is left-skewed
+     xlim=c(-1,1)) # Our distribution is right-skewed
 
 (split_plot <- ggplot(aes(year, scalepop, colour=Location.of.population), data = LPI_wren_cad) + 
     geom_point() + 
     theme(legend.position = "none")+
     facet_wrap(~ Location.of.population) + # create a facet for each location
     xlab("Year") + 
-    ylab("Pop")+
+    ylab("scalepop")+
   labs(
     x = "Year",
     y = "Population"))
 
-# Saving the basic histogram 
+# Saving the facet plots
 
 ggsave("Output/Facet_plot.pdf", split_plot)
 ggsave("Output/Facet_plot.png", split_plot)
+
+
+
 
 
 # Fit all data to linear model ignoring random effects for now
@@ -145,6 +149,49 @@ summary(mixed.lmer) # 0.04302/(0.04302 + 0.19176) =  ~18%
                     # The model estimate is bigger than associated error, meaning that 
                     ## effect/slope can be distinguished from 0. 
 
+
+# Random slope and random intercept
+
+
+mixed.re.rs <- lmer(scalepop ~ year + (1 + year|Location.of.population), data = LPI_wren_cad) 
+summary(mixed.re.rs)
+
+
+
+# Plotting model predictions---- 
+
+# Extract the prediction data frame
+pred.mm <- ggpredict(mixed.lmer, terms = c("year"))  # Outputs overall predictions for the model
+
+# Plot the predictions 
+
+(prediction_plot <- ggplot(pred.mm) + 
+    geom_line(aes(x = x, y = predicted)) +          # slope
+    geom_ribbon(aes(x = x, ymin = predicted - std.error, ymax = predicted + std.error), 
+                fill = "lightgrey", alpha = 0.5) +  # error band
+    geom_point(data = LPI_wren_cad,                      # adding the raw data (scaled values)
+               aes(x = year, y = scalepop, colour = Location.of.population)) + 
+    labs(x = "Year", y = "Population Abundance (Annual Index)", 
+         title = "Year does affect population abundance of winter wrens ") + 
+    theme_minimal()
+)
+
+
+
+
+# Saving prediction plot 
+ggsave("Output/prediction_plot.pdf", prediction_plot)
+ggsave("Output/prediction_plot.png", prediction_plot)
+
+
+# Make summary table----
+
+stargazer(mixed.lmer, type = "html",
+          out="Output/table.html",
+          digits = 3,
+          star.cutoffs = c(0.05, 0.01, 0.001),
+          digit.separator = "")
+
 # Checking assumptions again
 
 plot(mixed.lmer)
@@ -172,29 +219,6 @@ save_plot(filename = "Output/model_re.png",
 save_plot(filename = "Output/model_fe.png",
           height = 11, width = 9)  
 
-
-# Creating independence boxplots
-
-#boxplot(scalepop ~ Location.of.population, data = LPI_wren_cad) 
-
-(boxplot2 <- ggplot(LPI_wren_cad, aes(Location.of.population, scalepop, colour = Location.of.population)) +
-    geom_boxplot(fill = "grey", alpha = 0.8, show.legend=FALSE) +
-   theme_classic() +  
-    theme(axis.text.x = element_text(size = 12, angle = 15,margin=margin(20))) +
-    labs(x = "Location of population", y = "Scaled population"))
-    
-ggsave("Output/boxplot2.pdf", boxplot2)
-ggsave("Output/boxplot2.png", boxplot2)
-
-
-# Plot coloured points by location
-(colour_plot <- ggplot(LPI_wren_cad, aes(x = year, y = scalepop, colour = Location.of.population)) +
-    geom_point(size = 2) +
-    theme_classic() +
-    theme(legend.position = "none"))
-  
-ggsave("Output/colour_plot.pdf", colour_plot)
-ggsave("Output/colour_plot.png", colour_plot)
 
 
 
