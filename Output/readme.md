@@ -1,5 +1,5 @@
 # Output folder
 
-This folder contains all the output files of the main program [script](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/winterwren_model.R)
+This folder contains all the output files of the main program [script](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/winterwren_model_script_nicole.R)
 
 For easier reading these figures are also included in the [summary report](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/winterwren_model.R)
