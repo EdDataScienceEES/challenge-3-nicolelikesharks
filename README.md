@@ -24,3 +24,12 @@
   Original starter script used to choose a species from dataset: [challenge3_starter_script.R](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/challenge3_starter_script.R)    
   Main script used to filter and tidy the original dataset, as well as construct our model and export the results: [winterwren_model_script_nicole.R](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/script/winterwren_model_script_nicole.R)    
   
+## Access and citation:   
+Data from the LPI database can be used for non-commercial purposes, provided that full and appropriate acknowledgement is provided.    
+Citation: LPI 2016. Living Planet Index database. 2016. < www.livingplanetindex.org/>. Downloaded 10 Nov 2020. 
+
+## Etiquette:   
+Etiquette for the repository can be found in the [etiquette file](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/etiquette.md)
+
+## Aknowledgements:   
+Thank you to Jiri Subrt(subrt.jirka1@gmail.com), Sian Phillps(S.Phillips-5@sms.ed.ac.uk) for feedback, and Isla Myers-Smith(isla.myers-smith@ed.ac.uk) for supervising.
