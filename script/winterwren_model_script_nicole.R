@@ -81,12 +81,36 @@ str(LPI_wren_cad)
 
 # Creating basic histogram to take a look at the distribution 
 
-Population <- LPI_wren_cad$scalepop
+(hist <- ggplot(LPI_wren_cad, aes(x=scalepop)) + 
+  geom_histogram()+
+  labs(title="Histogram of wren population data",
+        x ="Annual index of wren population", y = "Count"))   # Our distribution is right-skewed
 
-hist(Population,
-     main="Histogram of wren population data",
-     xlab="Annual index of wren population",
-     xlim=c(-1,1)) # Our distribution is right-skewed
+ggsave("Output/basic_hist.pdf", hist)
+ggsave("Output/basic_hist.png", hist)
+
+
+
+# Creating independence boxplots
+
+(boxplot <- ggplot(LPI_wren_cad, aes(Location.of.population, scalepop, colour = Location.of.population)) +
+    geom_boxplot(fill = "grey", alpha = 0.8, show.legend=FALSE) +
+    theme_classic() +  
+    theme(axis.text.x = element_text(size = 12, angle = 15,margin=margin(20))) +
+    labs(x = "Location of population", y = "Scaled population"))
+
+ggsave("Output/boxplot.pdf", boxplot)
+ggsave("Output/boxplot.png", boxplot)
+
+
+# Plot coloured points by location
+(colour_plot <- ggplot(LPI_wren_cad, aes(x = year, y = scalepop, colour = Location.of.population)) +
+    geom_point(size = 2) +
+    theme_classic() +
+    theme(legend.position = "none"))
+
+ggsave("Output/colour_plot.pdf", colour_plot)
+ggsave("Output/colour_plot.png", colour_plot)
 
 
 # Looking at facet plots quickly to eyeball population trends in each location
@@ -128,7 +152,7 @@ ggsave("Output/prelim_plot.png", prelim_plot)
 
 # Checking assumptions to decide on what statistical model to use----
 
-plot(basic.lm) # Residial vs fitted: Residuals almost fall along a horizontal straight line.
+#plot(basic.lm) # Residial vs fitted: Residuals almost fall along a horizontal straight line.
               ## Good indication that model doesn't have non-linear relationships.
                # Q-Q: Residuals are lined well on the straight dashed line. Good!
                # Scale-location: Red line almost horizontal, randomly spread points. Good
@@ -136,11 +160,26 @@ plot(basic.lm) # Residial vs fitted: Residuals almost fall along a horizontal st
 
 
 # Saving residual vs fitted, qq, scale-location and residuals vs leverage plots
-
 pdf("Output/assumption_plots.pdf") 
 plot(basic.lm)
 dev.off()
 
+
+png("Output/assumption_plot_1.png") 
+(plot(basic.lm, which = 1))
+dev.off()
+
+png("Output/assumption_plot_2.png") 
+(plot(basic.lm, which = 2))
+dev.off()
+
+png("Output/assumption_plot_3.png") 
+(plot(basic.lm, which = 3))
+dev.off()
+
+png("Output/assumption_plot_4.png") 
+(plot(basic.lm, which = 5))
+dev.off()
 
 # Generating mixed effect models----
 
@@ -210,8 +249,8 @@ pred.mm <- ggpredict(mixed.lmer, terms = c("year"))  # Outputs overall predictio
 )
 
 # Saving prediction plot (random intercept model)
-ggsave("Output/prediction_plot.pdf", prediction_plot)
-ggsave("Output/prediction_plot.png", prediction_plot)
+ggsave("Output/prediction_plot.pdf", prediction_plot, width = 16, height = 9, units = "cm")
+ggsave("Output/prediction_plot.png", prediction_plot, width = 16, height = 9, units = "cm")
 
 # Extract the prediction data frame
 
@@ -233,8 +272,8 @@ pred.mm.rs <- ggpredict(mixed.re.rs, terms = c("year"))  # this gives overall pr
 
 
 # Saving prediction plot (random slope model)
-ggsave("Output/prediction_plot_rs.pdf", prediction_plot_rs)
-ggsave("Output/prediction_plot_rs.png", prediction_plot_rs)
+ggsave("Output/prediction_plot_rs.pdf", prediction_plot_rs, width = 16, height = 9, units = "cm")
+ggsave("Output/prediction_plot_rs.png", prediction_plot_rs, width = 16, height = 9, units = "cm")
 
 
 # Make summary table----
@@ -247,7 +286,13 @@ stargazer(mixed.lmer, type = "html",
 
 # Checking assumptions again
 
+png("Output/mixed_lmer_plot.png") 
 plot(mixed.lmer)
+dev.off()
+
+
+
+
 qqnorm(resid(mixed.lmer))
 qqline(resid(mixed.lmer))  # points roughly follow line, deviate slightly at the end
 
