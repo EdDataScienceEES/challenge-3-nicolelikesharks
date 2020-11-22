@@ -34,7 +34,7 @@ I used a Frequentist  modelling framework in order to test my hypothesis- if win
 
 The hypotheses are as follows:   
 
-​ Hypothesis: Winter wren population abundance increase over time
+​ Hypothesis: Winter wren population abundance increases over time
 
 ​ Null hypothesis: Winter wren populations do not increase over time i.e they decrease, or stay constant, or do not exhibit any clear trends.  
 
@@ -49,7 +49,7 @@ The full code can be accessed [here](https://github.com/EdDataScienceEES/challen
 
 ## Limitations:  
 
-As population data were not integer counts of individuals, a Poisson regression model could not be used. Despite considering manipulating  the data (to give integers), I decided to use a mixed effect linear model.  
+As population data were not integer counts of individuals, a Poisson regression model could not be used. Despite considering manipulating the data (multiplying by a 1000 to give integers), I decided to use a mixed effect linear model.  
 
 I attempted to include locations of populations as my random slope as well, because specific locations may relatively important environmental, ecological differences that might affect the relationship between winter wren population abundance and time.
 
@@ -63,16 +63,18 @@ However it returned the error below:
 
 which suggests that the model didn't converge and that we should be wary of results generated (that took in account both the random intercept and random slope). Due to the population already being scaled, I couldn't scale the population further to solve this error and make model converge.
 
+In addition, since I filtered my data down to a single unit and sampling method, my results may not accurately reflect the overall trend of winter wren populations over time. 
+
 ## Results and conclusions
 
 ![prediction plot](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/prediction_plot.png)  
-Figure 2: Winter wren populations have increased over time from 1970-2010 in Canada. (Slope= 0.017, see Table 1 for full model outputs). The points are raw data colour coded based on the location of populations. The narrow grey shaded band around the line represents the area in which the predicted trend could fall given the standard error, and suggests a good fit.   
+Figure 2: Winter wren populations have increased over time from 1970-2010 in Canada. (Slope= 0.017, see Figure 3 for full model outputs). The points are raw data colour coded based on the location of populations. The narrow grey shaded band around the line represents the area in which the predicted trend could fall given the standard error, and suggests a good fit.   
 
 ![table](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/table.png)  
-Figure 3:Analysing summary from the model of population trends of winter wrens.  There is an increase of 1.8% a year
+Figure 3:Analysing summary from the model of population trends of winter wrens. The estimate for `year` shows us that winter wren population abundance is increasing at a rate of 0.018 each year.  
 
 
-In conlusion, populations of winter wrens do exhibit a clear upward trend from 1970-2010, thus confirming the hypothesis. The null hypothesis is hence rejected. 
+In conlusion, populations of winter wrens do exhibit a clear upward trend from 1970-2010, thus confirming the hypothesis. The null hypothesis is hence rejected. On the surface, the fact that winter wrens populations are not declining like many other species as indicated in the [LPI report](https://livingplanetindex.org/home/index) could be deemed as a good thing. However, the increasing trend of winter wren populations may indicate and reflect a larger, more pressing issue- that of global climate change.  In addition, the extreme, unprecedented increase (or decrease) in the population of any species would disrupt the delicate balance in the ecosystem and the relationships within them. Insect pest populations may also rise as a result of the increased number of birds feeding on predaceous insects and parasitoids (Whelan et al., 2015). It is thus important to note that our individual reports on individual species should not be looked at in isolation. Given the complex interactions between trophic levels and species within an ecosystem, more research must be done to examine these links to come to a more holistic understanding for future conservation planning. Perhaps a follow up report could model the effect of winter wren populations on keystone insects. 
 
 
 ## Appendix
@@ -81,13 +83,13 @@ In conlusion, populations of winter wrens do exhibit a clear upward trend from 1
 Figure 3: Winter wren distribution is right-skewed, and should follow a Poisson distribution.
 
 ![boxplot 2](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/boxplot.png)    
-Figure 4: Assesssing/ comparing the medians and spread of groups (locations).  The median weights of winter wren populations look different for each location and the weights of some groups are more variable than others.
+Figure 4: Assesssing/ comparing the medians and spread of groups (locations).  The median weights of winter wren populations look different for each location and the weights of some groups are more variable than others. Looks like there is something going on!
 
 ![facet prediction plot ri](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/Pred_facet_plot_ri.png)  
-Figure 5: Visualizing fitted prediction lines (in each lodation) for model allowing for random intercept. 
+Figure 5: Visualizing fitted prediction lines (in each location) for model allowing for random intercept. 
 
 ![facet prediction plot rs](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/Pred_facet_plot_rs.png)
-Figure 6: Visualizing fitted prediction lines (in each lodation) for model allowing for random slope as well as intercept
+Figure 6: Visualizing fitted prediction lines (in each location) for model allowing for random slope as well as intercept
 
 ![model random effect](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Output/model_re.png)  Figure 7: Showing how the relationship between population and year vary according to different levels of our random effect (location of populations).
 
