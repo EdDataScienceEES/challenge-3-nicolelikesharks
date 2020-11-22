@@ -30,9 +30,13 @@
 ## Resources: 
 
 https://ourcodingclub.github.io/2017/02/28/modelling.html - Intro to linear models
+
 https://ourcodingclub.github.io/2018/04/06/model-design.html - Intro to model design
+
 https://ourcodingclub.github.io/2017/03/15/mixed-models.html - Intro to mixed effects models 
+
 https://ourcodingclub.github.io/2017/03/29/data-vis-2.html - Data visualisation (including plotting mixed effects)
+
 https://ourcodingclub.github.io/2018/01/22/mcmcglmm.html - Intro to Bayesian statistics
   
 ## Access and citation:   
