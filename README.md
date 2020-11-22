@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  Winter wren photo by Suzanne Britton 
+ Photo by Suzanne Britton 
 </p>
 
 
@@ -41,6 +41,7 @@ https://ourcodingclub.github.io/2017/03/15/mixed-models.html - Intro to mixed ef
 https://ourcodingclub.github.io/2017/03/29/data-vis-2.html - Data visualisation (including plotting mixed effects)
 
 https://ourcodingclub.github.io/2018/01/22/mcmcglmm.html - Intro to Bayesian statistics
+
   
 ## Access and citation:   
 Data from the LPI database can be used for non-commercial purposes, provided that full and appropriate acknowledgement is provided.    
@@ -49,5 +50,5 @@ Citation: LPI 2016. Living Planet Index database. 2016. < www.livingplanetindex.
 ## Etiquette:   
 Etiquette for the repository can be found in the [etiquette file](https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/etiquette.md)
 
-## Aknowledgements:   
-Thank you to Jiri Subrt(subrt.jirka1@gmail.com), Sian Phillps(S.Phillips-5@sms.ed.ac.uk) for feedback, and Isla Myers-Smith(isla.myers-smith@ed.ac.uk) for supervising.
+## Acknowledgements:   
+Thank you so much to Jiri Subrt(subrt.jirka1@gmail.com), Sian Phillps(S.Phillips-5@sms.ed.ac.uk) for feedback, and Isla Myers-Smith(isla.myers-smith@ed.ac.uk) for supervising. 
