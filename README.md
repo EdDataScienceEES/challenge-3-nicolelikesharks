@@ -6,6 +6,9 @@
   <img width="460" height="300" src="https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Documentation/Images/winterwren_image.jpg?raw=true">
 </p>
 
+<p align="center">
+  Winter wren photo by Suzanne Britton 
+</p>
 
 
 ## Content:
