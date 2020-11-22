@@ -2,6 +2,9 @@
 
 
 
+<p align="center">
+  <img width="460" height="300" src="https://github.com/EdDataScienceEES/challenge-3-nicolelikesharks/blob/master/Documentation/Images/winterwren_image.jpg?raw=true">
+</p>
 
 
 
